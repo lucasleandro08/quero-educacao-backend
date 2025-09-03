@@ -1,6 +1,8 @@
 export const KIND_MAPPINGS = {
     'Presencial' : 'Presencial',
-    'EaD' : 'EaD'
+    'presencial' : 'Presencial',
+    'EaD' : 'EaD',
+    'ead' : 'EaD'
 } as const;
 
 export const LEVEL_MAPPINGS  = {

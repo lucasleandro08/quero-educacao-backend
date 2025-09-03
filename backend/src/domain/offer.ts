@@ -3,7 +3,7 @@ export interface RawOffer {
     rating: number;
     fullPrice: number;
     offeredPrice: number;
-    kind: 'Presencial' | 'EaD';
+    kind: 'Presencial' | 'EaD' | 'presencial' | 'ead';
     level: 'bacharelado' | 'tecnologo' | 'licenciatura';
     iesLogo: string;
     iesName: string;
@@ -23,7 +23,7 @@ export interface ProcessedOffer {
 
 export interface QueryFilters {
   level?: ('bacharelado' | 'tecnologo' | 'licenciatura')[];
-  kind?: ('Presencial' | 'EaD')[];
+  kind?: ('Presencial' | 'EaD' | 'presencial' | 'ead')[];
   minPrice?: number;
   maxPrice?: number;
   search?: string;
