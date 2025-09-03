@@ -46,7 +46,6 @@ export class DataLoader {
     }));
   }
 
-  //get raw data
   loadRawOffers(): RawOffer[] {
     try {
       const dataPath = join(process.cwd(), 'data.json');
