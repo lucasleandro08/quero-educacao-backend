@@ -10,7 +10,27 @@ export class OfferQueryService {
   }
 
   queryOffers(filters: QueryFilters = {}): PaginatedResponse<Partial<ProcessedOffer>> {
-    const rawOffers = this.dataLoader.loadRawOffers();
+     const rawData = this.dataLoader.loadRawOffers();
+    
+
+    if (!Array.isArray(rawData)) {
+      console.warn('DataLoader.loadRawOffers() não retornou array:', {
+        type: typeof rawData,
+        value: rawData
+      });
+      
+      return {
+        data: [],
+        pagination: {
+          currentPage: filters.page || 1,
+          totalPages: 0,
+          totalItems: 0,
+          itemsPerPage: filters.limit || 10
+        }
+      };
+    }
+
+    const rawOffers = rawData;
     
 
     let filteredOffers = this.applyFilters(rawOffers, filters);
