@@ -1,24 +1,24 @@
 export interface RawOffer {
-   courseName: string,
-    rating: number,
-    fullPrice: number,
-    offeredPrice: number,
-    kind: string ,
-    level: string,
-    iesLogo: string,
-    iesName: string
+    courseName: string;
+    rating: number;
+    fullPrice: number;
+    offeredPrice: number;
+    kind: 'Presencial' | 'EaD';
+    level: 'bacharelado' | 'tecnologo' | 'licenciatura';
+    iesLogo: string;
+    iesName: string;
 }
 
 export interface ProcessedOffer {
-    courseName: string,
-    rating: number,
-    fullPrice: number,
-    offeredPrice: number,
-    kind: string ,
-    level: string,
-    iesLogo: string,
-    iesName: string,
-    discountPorcentage: string
+    courseName: string;
+    rating: number;
+    fullPrice: string;
+    offeredPrice: string;
+    kind: string;
+    level: string;
+    iesLogo: string;
+    iesName: string;
+    discountPercentage: string;
 }
 
 export interface QueryFilters{
