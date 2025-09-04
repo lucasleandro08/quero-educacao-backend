@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from './Header';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,23 +13,47 @@ export const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header totalOffers={totalOffers} isLoading={isLoading} />
+      {/* Header */}
+      <header className="header-container">
+        <div className="header-wrapper">
+          {/* Logo e título */}
+          <div className="header-brand">
+            <div className="brand-icon">
+              <span className="brand-letter">Q</span>
+            </div>
+            <div className="brand-text">
+              <h1 className="brand-title">Ofertas de Bolsa de Estudo</h1>
+              <p className="brand-subtitle">Encontre a graduação ideal para você</p>
+            </div>
+          </div>
+
+          {/* Contador de ofertas */}
+          <div className="offers-counter">
+            <div className="counter-icon">🎓</div>
+            <div className="counter-text">
+              <span className="counter-number">
+                {isLoading ? '...' : totalOffers.toLocaleString('pt-BR')}
+              </span>
+              <span className="counter-label">ofertas disponíveis</span>
+            </div>
+          </div>
+        </div>
+      </header>
       
-      <main className="container py-8">
+      {/* Main content */}
+      <main>
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="container py-8">
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              © 2025 Quero Educação - Desafio Técnico
-            </p>
-            <p className="text-xs text-gray-500 mt-1">
-              Desenvolvido com React, TypeScript e Node.js
-            </p>
-          </div>
+      <footer className="footer-container">
+        <div className="footer-content">
+          <p className="footer-text">
+            © 2025 Quero Educação - Desafio Técnico
+          </p>
+          <p className="footer-subtext">
+            Desenvolvido com React, TypeScript e Node.js
+          </p>
         </div>
       </footer>
     </div>

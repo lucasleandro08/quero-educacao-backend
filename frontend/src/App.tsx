@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Layout } from './components/layout/Layout';
 import { SearchBar } from './components/filters/SearchBar';
 import { FilterPanel } from './components/filters/FilterPanel';
-import { OfferList } from './components/offer/OfferList';
+import { OfferList } from './offer/OfferList';
 import { Pagination } from './components/ui/Pagination';
-import { useOffers } from './hooks/useOffers';
-import { QueryFilters } from './types/offer';
+import { useOffers } from '../src/hooks/useOffers';
+import { QueryFilters } from '../src/components/types/offer';
 import './styles/globals.css';
 
 const App: React.FC = () => {
@@ -32,7 +32,7 @@ const App: React.FC = () => {
     setFilters(prev => ({
       ...prev,
       search: debouncedSearchTerm || undefined,
-      page: 1 // Reset página ao buscar
+      page: 1 
     }));
   }, [debouncedSearchTerm]);
 
@@ -60,11 +60,11 @@ const App: React.FC = () => {
     >
       <div className="space-y-8">
         {/* Hero Section */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Encontre sua graduação ideal! 🎯
+        <div className="container">
+          <h2 className="hero-title">
+            Encontre sua graduação ideal!
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="hero-subtitle">
             Compare ofertas de bolsa de estudo das melhores instituições de ensino superior do Brasil.
           </p>
         </div>
@@ -104,7 +104,7 @@ const App: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Mobile filter toggle - poderia ser implementado */}
+                {/* Mobile filter toggle */}
                 <div className="mt-4 sm:mt-0">
                   <span className="text-sm text-gray-500">
                     Página {data.pagination.currentPage} de {data.pagination.totalPages}

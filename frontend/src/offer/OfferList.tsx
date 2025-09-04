@@ -1,11 +1,11 @@
 import React from 'react';
-import { Offer } from '../../types/offer';
+import { Offer } from '../components/types/offer';
 import { OfferCard } from './OfferCard';
 
 interface OfferListProps {
   offers: Offer[];
   isLoading: boolean;
-  error?: string;
+  error?: string | null;
 }
 
 export const OfferList: React.FC<OfferListProps> = ({ 
@@ -14,33 +14,29 @@ export const OfferList: React.FC<OfferListProps> = ({
   error 
 }) => {
   if (isLoading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[...Array(6)].map((_, index) => (
-          <div key={index} className="card animate-pulse">
-            <div className="p-6 space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
-                <div className="space-y-2 flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                </div>
-              </div>
-              <div className="flex space-x-2">
-                <div className="h-6 bg-gray-200 rounded-full w-20"></div>
-                <div className="h-6 bg-gray-200 rounded-full w-16"></div>
-              </div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div className="h-8 bg-gray-200 rounded w-3/4"></div>
-              </div>
-              <div className="h-10 bg-gray-200 rounded"></div>
-            </div>
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[...Array(6)].map((_, index) => (
+        <div key={index} className="offer-card-skeleton animate-pulse">
+          <div className="skeleton-header">
+            <div className="skeleton-logo"></div>
+            <div className="skeleton-rating"></div>
           </div>
-        ))}
-      </div>
-    );
-  }
+          <div className="skeleton-title"></div>
+          <div className="skeleton-badges">
+            <div className="skeleton-badge"></div>
+            <div className="skeleton-badge"></div>
+          </div>
+          <div className="skeleton-pricing">
+            <div className="skeleton-price"></div>
+            <div className="skeleton-price"></div>
+          </div>
+          <div className="skeleton-button"></div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
   if (error) {
     return (

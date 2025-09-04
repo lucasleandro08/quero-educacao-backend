@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { apiService } from '../services/api';
-import { QueryFilters, PaginatedResponse } from '../types/offer';
+import { apiService } from '../components/services/api';
+import { QueryFilters, PaginatedResponse } from '../components/types/offer';
 
 export const useOffers = () => {
   const [data, setData] = useState<PaginatedResponse | null>(null);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { QueryFilters } from '../../types/offer';
+import { QueryFilters } from '../types/offer';
 
 interface FilterPanelProps {
   filters: QueryFilters;
@@ -11,7 +11,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   onFiltersChange
 }) => {
   const updateFilter = (key: keyof QueryFilters, value: any) => {
-    onFiltersChange({ ...filters, [key]: value });
+    onFiltersChange({ ...filters, [key]: value, page: 1 }); 
   };
 
   const toggleArrayFilter = (key: 'level' | 'kind', value: string) => {
@@ -26,7 +26,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   const clearAllFilters = () => {
     onFiltersChange({
       page: 1,
-      limit: filters.limit
+      limit: filters.limit || 12
     });
   };
 
@@ -39,132 +39,140 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   );
 
   return (
-    <div className="card">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900">Filtros</h3>
-          {hasActiveFilters && (
-            <button
-              onClick={clearAllFilters}
-              className="text-sm text-primary-blue hover:text-primary-blue-dark"
-            >
-              Limpar filtros
-            </button>
-          )}
+    <div className="filter-panel">
+      <div className="filter-header">
+        <h3 className="filter-title">Filtros</h3>
+        {hasActiveFilters && (
+          <button
+            onClick={clearAllFilters}
+            className="clear-filters-btn"
+          >
+            Limpar tudo
+          </button>
+        )}
+      </div>
+
+      <div className="filter-sections">
+        {/* Tipo de graduação */}
+        <div className="filter-section">
+          <h4 className="section-title">Tipo de Graduação</h4>
+          <div className="checkbox-group">
+            {[
+              { value: 'bacharelado', label: 'Bacharelado', emoji: '🎓' },
+              { value: 'tecnologo', label: 'Tecnólogo', emoji: '🎓' },
+              { value: 'licenciatura', label: 'Licenciatura', emoji: '🎓' }
+            ].map(option => (
+              <label key={option.value} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  checked={filters.level?.includes(option.value) || false}
+                  onChange={() => toggleArrayFilter('level', option.value)}
+                  className="custom-checkbox"
+                />
+                <span className="checkbox-label">
+                  <span className="checkbox-emoji">{option.emoji}</span>
+                  {option.label}
+                </span>
+              </label>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-6">
-          {/* Tipo de graduação */}
-          <div>
-            <h4 className="text-sm font-medium text-gray-700 mb-3">Tipo de Graduação</h4>
-            <div className="space-y-2">
-              {[
-                { value: 'bacharelado', label: 'Bacharelado 🎓' },
-                { value: 'tecnologo', label: 'Tecnólogo 🎓' },
-                { value: 'licenciatura', label: 'Licenciatura 🎓' }
-              ].map(option => (
-                <label key={option.value} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={filters.level?.includes(option.value) || false}
-                    onChange={() => toggleArrayFilter('level', option.value)}
-                    className="w-4 h-4 text-primary-blue border-gray-300 rounded focus:ring-primary-blue focus:ring-2"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Modalidade */}
-          <div>
-            <h4 className="text-sm font-medium text-gray-700 mb-3">Modalidade</h4>
-            <div className="space-y-2">
-              {[
-                { value: 'Presencial', label: 'Presencial 🏫' },
-                { value: 'EaD', label: 'EaD 🏠' }
-              ].map(option => (
-                <label key={option.value} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={filters.kind?.includes(option.value) || false}
-                    onChange={() => toggleArrayFilter('kind', option.value)}
-                    className="w-4 h-4 text-primary-blue border-gray-300 rounded focus:ring-primary-blue focus:ring-2"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Faixa de Preço */}
-          <div>
-            <h4 className="text-sm font-medium text-gray-700 mb-3">Faixa de Preço</h4>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs text-gray-600 mb-1">Preço mínimo</label>
+        {/* Modalidade */}
+        <div className="filter-section">
+          <h4 className="section-title">Modalidade</h4>
+          <div className="checkbox-group">
+            {[
+              { value: 'presencial', label: 'Presencial', emoji: '🏫' },
+              { value: 'ead', label: 'EaD', emoji: '🏠' }
+            ].map(option => (
+              <label key={option.value} className="checkbox-item">
                 <input
-                  type="number"
-                  placeholder="R$ 0"
-                  value={filters.minPrice || ''}
-                  onChange={(e) => updateFilter('minPrice', e.target.value ? Number(e.target.value) : undefined)}
-                  className="input text-sm"
+                  type="checkbox"
+                  checked={filters.kind?.includes(option.value) || false}
+                  onChange={() => toggleArrayFilter('kind', option.value)}
+                  className="custom-checkbox"
                 />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-600 mb-1">Preço máximo</label>
-                <input
-                  type="number"
-                  placeholder="R$ 10000"
-                  value={filters.maxPrice || ''}
-                  onChange={(e) => updateFilter('maxPrice', e.target.value ? Number(e.target.value) : undefined)}
-                  className="input text-sm"
-                />
-              </div>
+                <span className="checkbox-label">
+                  <span className="checkbox-emoji">{option.emoji}</span>
+                  {option.label}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Faixa de preço */}
+        <div className="filter-section">
+          <h4 className="section-title">Faixa de Preço</h4>
+          <div className="price-inputs">
+            <div className="price-input-group">
+              <label className="input-label">Preço mínimo</label>
+              <input
+                type="number"
+                placeholder="R$ 0"
+                value={filters.minPrice || ''}
+                onChange={(e) => updateFilter('minPrice', e.target.value ? Number(e.target.value) : undefined)}
+                className="price-input"
+                min="0"
+                step="50"
+              />
+            </div>
+            <div className="price-input-group">
+              <label className="input-label">Preço máximo</label>
+              <input
+                type="number"
+                placeholder="R$ 10000"
+                value={filters.maxPrice || ''}
+                onChange={(e) => updateFilter('maxPrice', e.target.value ? Number(e.target.value) : undefined)}
+                className="price-input"
+                min="0"
+                step="50"
+              />
             </div>
           </div>
+        </div>
 
-          {/* Ordenação */}
-          <div>
-            <h4 className="text-sm font-medium text-gray-700 mb-3">Ordenar por</h4>
-            <select
-              value={filters.sortBy || ''}
-              onChange={(e) => updateFilter('sortBy', e.target.value || undefined)}
-              className="select text-sm"
-            >
-              <option value="">Selecione...</option>
-              <option value="courseName">Nome do curso</option>
-              <option value="offeredPrice">Preço com desconto</option>
-              <option value="rating">Avaliação</option>
-            </select>
-            
-            {filters.sortBy && (
-              <div className="mt-2 flex space-x-2">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortOrder"
-                    value="asc"
-                    checked={filters.sortOrder === 'asc'}
-                    onChange={(e) => updateFilter('sortOrder', e.target.value as 'asc' | 'desc')}
-                    className="w-4 h-4 text-primary-blue"
-                  />
-                  <span className="ml-1 text-xs text-gray-600">Crescente</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="sortOrder"
-                    value="desc"
-                    checked={filters.sortOrder === 'desc'}
-                    onChange={(e) => updateFilter('sortOrder', e.target.value as 'asc' | 'desc')}
-                    className="w-4 h-4 text-primary-blue"
-                  />
-                  <span className="ml-1 text-xs text-gray-600">Decrescente</span>
-                </label>
-              </div>
-            )}
-          </div>
+        {/* Ordenação */}
+        <div className="filter-section">
+          <h4 className="section-title">Ordenar por</h4>
+          <select
+            value={filters.sortBy || ''}
+            onChange={(e) => updateFilter('sortBy', e.target.value || undefined)}
+            className="sort-select"
+          >
+            <option value="">Selecione...</option>
+            <option value="courseName">Nome do curso</option>
+            <option value="offeredPrice">Preço com desconto</option>
+            <option value="rating">Avaliação</option>
+          </select>
+          
+          {filters.sortBy && (
+            <div className="sort-order">
+              <label className="radio-item">
+                <input
+                  type="radio"
+                  name="sortOrder"
+                  value="asc"
+                  checked={filters.sortOrder === 'asc' || !filters.sortOrder}
+                  onChange={(e) => updateFilter('sortOrder', e.target.value as 'asc' | 'desc')}
+                  className="custom-radio"
+                />
+                <span>Crescente</span>
+              </label>
+              <label className="radio-item">
+                <input
+                  type="radio"
+                  name="sortOrder"
+                  value="desc"
+                  checked={filters.sortOrder === 'desc'}
+                  onChange={(e) => updateFilter('sortOrder', e.target.value as 'asc' | 'desc')}
+                  className="custom-radio"
+                />
+                <span>Decrescente</span>
+              </label>
+            </div>
+          )}
         </div>
       </div>
     </div>

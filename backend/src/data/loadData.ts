@@ -1,4 +1,3 @@
-// backend/src/data/loadData.ts
 import { readFileSync, existsSync } from 'fs';
 import { join, resolve } from 'path';
 import { RawOffer, ProcessedOffer } from '../domain/offer.js';
