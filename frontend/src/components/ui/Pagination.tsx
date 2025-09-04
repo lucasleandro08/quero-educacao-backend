@@ -61,15 +61,12 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className="pagination-container">
-      {/* Informações da página */}
       <div className="pagination-info">
         <p className="pagination-text">
           Mostrando <span className="font-semibold">{startItem}</span> até{' '}
           <span className="font-semibold">{endItem}</span> de{' '}
           <span className="font-semibold">{totalItems}</span> resultados
         </p>
-        
-        {/* Items per page selector */}
         <div className="items-per-page">
           <label className="per-page-label">Por página:</label>
           <select
@@ -84,10 +81,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           </select>
         </div>
       </div>
-
-      {/* Controles de navegação */}
       <div className="pagination-controls">
-        {/* Botão anterior */}
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -99,7 +93,6 @@ export const Pagination: React.FC<PaginationProps> = ({
           <span className="hidden sm:inline">Anterior</span>
         </button>
 
-        {/* Números das páginas */}
         <div className="pagination-numbers">
           {getPageNumbers().map((page, index) => (
             <React.Fragment key={index}>
@@ -119,7 +112,6 @@ export const Pagination: React.FC<PaginationProps> = ({
           ))}
         </div>
 
-        {/* Botão próximo */}
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}

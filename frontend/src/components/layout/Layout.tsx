@@ -13,10 +13,8 @@ export const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="header-container">
         <div className="header-wrapper">
-          {/* Logo e título */}
           <div className="header-brand">
             <div className="brand-icon">
               <span className="brand-letter">Q</span>
@@ -27,7 +25,6 @@ export const Layout: React.FC<LayoutProps> = ({
             </div>
           </div>
 
-          {/* Contador de ofertas */}
           <div className="offers-counter">
             <div className="counter-icon">🎓</div>
             <div className="counter-text">
@@ -40,12 +37,10 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
       </header>
       
-      {/* Main content */}
       <main>
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="footer-container">
         <div className="footer-content">
           <p className="footer-text">

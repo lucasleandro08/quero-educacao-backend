@@ -10,7 +10,6 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
   return (
     <div className="offer-card">
       <div className="offer-card-content">
-        {/* Header com logo e rating */}
         <div className="offer-header">
           <div className="offer-institution">
             <img
@@ -32,19 +31,15 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
             <span className="rating-value">{offer.rating.toFixed(1)}</span>
           </div>
         </div>
-
-        {/* Título do curso */}
         <div className="course-title-section">
           <h3 className="course-title">{offer.courseName}</h3>
         </div>
 
-        {/* Badges */}
         <div className="badges-section">
           <span className="badge badge-level">{offer.level}</span>
           <span className="badge badge-kind">{offer.kind}</span>
         </div>
 
-        {/* Seção de preços - flexível */}
         <div className="pricing-section">
           <div className="price-comparison">
             <div className="original-price-row">
@@ -59,8 +54,6 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer }) => {
           </div>
         </div>
       </div>
-
-      {/* CTA */}
       <div className="offer-card-footer">
         <button className="cta-button">
           Ver oferta completa

@@ -36,7 +36,6 @@ const App: React.FC = () => {
     }));
   }, [debouncedSearchTerm]);
 
-  // Carregar ofertas quando filtros mudarem
   useEffect(() => {
     fetchOffers(filters);
   }, [filters, fetchOffers]);
@@ -59,7 +58,6 @@ const App: React.FC = () => {
       isLoading={isLoading}
     >
       <div className="space-y-8">
-        {/* Hero Section */}
         <div className="container">
           <h2 className="hero-title">
             Encontre sua graduação ideal!
@@ -68,8 +66,6 @@ const App: React.FC = () => {
             Compare ofertas de bolsa de estudo das melhores instituições de ensino superior do Brasil.
           </p>
         </div>
-
-        {/* Search Bar */}
         <div className="max-w-2xl mx-auto">
           <SearchBar
             value={searchTerm}
@@ -79,7 +75,6 @@ const App: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar com filtros */}
           <div className="lg:col-span-1">
             <div className="sticky top-24">
               <FilterPanel
@@ -88,10 +83,7 @@ const App: React.FC = () => {
               />
             </div>
           </div>
-
-          {/* Conteúdo principal */}
           <div className="lg:col-span-3 space-y-6">
-            {/* Resultados header */}
             {data && !isLoading && (
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-4 rounded-lg border border-gray-200">
                 <div>
@@ -103,8 +95,6 @@ const App: React.FC = () => {
                     {searchTerm && ` para "${searchTerm}"`}
                   </p>
                 </div>
-
-                {/* Mobile filter toggle */}
                 <div className="mt-4 sm:mt-0">
                   <span className="text-sm text-gray-500">
                     Página {data.pagination.currentPage} de {data.pagination.totalPages}
@@ -113,14 +103,12 @@ const App: React.FC = () => {
               </div>
             )}
 
-            {/* Lista de ofertas */}
             <OfferList
               offers={data?.data || []}
               isLoading={isLoading}
               error={error}
             />
 
-            {/* Paginação */}
             {data && data.pagination.totalPages > 1 && (
               <Pagination
                 currentPage={data.pagination.currentPage}

@@ -53,7 +53,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
       </div>
 
       <div className="filter-sections">
-        {/* Tipo de graduação */}
         <div className="filter-section">
           <h4 className="section-title">Tipo de Graduação</h4>
           <div className="checkbox-group">
@@ -78,7 +77,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           </div>
         </div>
 
-        {/* Modalidade */}
         <div className="filter-section">
           <h4 className="section-title">Modalidade</h4>
           <div className="checkbox-group">
@@ -102,7 +100,6 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           </div>
         </div>
 
-        {/* Faixa de preço */}
         <div className="filter-section">
           <h4 className="section-title">Faixa de Preço</h4>
           <div className="price-inputs">
