@@ -16,7 +16,7 @@ Um sistema web para consulta e filtro de ofertas de bolsa de estudo, desenvolvid
 - npm 8.0.0 ou superior
 ## Instalação e Execução
 ### 1. Clone o repositório
-git clone https://ithub.com/lucasleandro08/quero-educacao-backend.git <br>
+git clone https://github.com/lucasleandro08/quero-educacao-backend.git <br>
 cd quero-educacao-backend <br>
 ### 2. Instale as dependências
 npm run install:all
